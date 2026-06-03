@@ -22,7 +22,7 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch --upgrade -q
+# MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch "typing_extensions>=4.12.0" --upgrade -q
 
 # COMMAND ----------
 

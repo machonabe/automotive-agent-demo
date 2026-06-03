@@ -27,7 +27,7 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch openai --upgrade -q
+# MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch openai "typing_extensions>=4.12.0" --upgrade -q
 
 # COMMAND ----------
 
