@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Databricks generated files
+agent.py
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/

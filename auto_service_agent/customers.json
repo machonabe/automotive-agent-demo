@@ -1,0 +1,82 @@
+[
+  {
+    "customer_id": "C001",
+    "name": "田中 太郎",
+    "tier": "gold",
+    "vehicle_ids": ["V001", "V002"],
+    "member_since": "2018/04/15",
+    "email": "taro.tanaka@example.com",
+    "phone": "090-1234-5678",
+    "address": "東京都港区赤坂1-1-1"
+  },
+  {
+    "customer_id": "C002",
+    "name": "鈴木 花子",
+    "tier": "silver",
+    "vehicle_ids": ["V003"],
+    "member_since": "2020/09/01",
+    "email": "hanako.suzuki@example.com",
+    "phone": "080-2345-6789",
+    "address": "大阪府大阪市北区梅田2-2-2"
+  },
+  {
+    "customer_id": "C003",
+    "name": "山田 一郎",
+    "tier": "standard",
+    "vehicle_ids": ["V004"],
+    "member_since": "2024/01/20",
+    "email": "ichiro.yamada@example.com",
+    "phone": "070-3456-7890",
+    "address": "愛知県名古屋市中区栄3-3-3"
+  },
+  {
+    "customer_id": "C004",
+    "name": "佐藤 美咲",
+    "tier": "gold",
+    "vehicle_ids": ["V005"],
+    "member_since": "2017/06/10",
+    "email": "misaki.sato@example.com",
+    "phone": "090-4567-8901",
+    "address": "神奈川県横浜市西区みなとみらい4-4-4"
+  },
+  {
+    "customer_id": "C005",
+    "name": "伊藤 健二",
+    "tier": "silver",
+    "vehicle_ids": ["V006", "V007"],
+    "member_since": "2019/11/25",
+    "email": "kenji.ito@example.com",
+    "phone": "080-5678-9012",
+    "address": "福岡県福岡市博多区中洲5-5-5"
+  },
+  {
+    "customer_id": "C006",
+    "name": "渡辺 良子",
+    "tier": "standard",
+    "vehicle_ids": ["V008"],
+    "member_since": "2023/07/03",
+    "email": "yoshiko.watanabe@example.com",
+    "phone": "070-6789-0123",
+    "address": "北海道札幌市中央区大通6-6-6"
+  },
+  {
+    "customer_id": "C007",
+    "name": "中村 浩介",
+    "tier": "gold",
+    "vehicle_ids": ["V009"],
+    "member_since": "2016/03/18",
+    "email": "kosuke.nakamura@example.com",
+    "phone": "090-7890-1234",
+    "address": "京都府京都市中京区河原町7-7-7"
+  },
+  {
+    "customer_id": "C008",
+    "name": "小林 真理子",
+    "tier": "silver",
+    "vehicle_ids": ["V010"],
+    "member_since": "2021/05/12",
+    "email": "mariko.kobayashi@example.com",
+    "phone": "080-8901-2345",
+    "address": "宮城県仙台市青葉区一番町8-8-8"
+  }
+]
