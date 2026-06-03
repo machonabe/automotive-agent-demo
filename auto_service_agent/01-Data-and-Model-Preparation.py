@@ -23,7 +23,6 @@
 # COMMAND ----------
 
 # MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch --upgrade -q
-# MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 

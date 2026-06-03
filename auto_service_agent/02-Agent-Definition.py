@@ -28,7 +28,6 @@
 # COMMAND ----------
 
 # MAGIC %pip install databricks-sdk mlflow databricks-vectorsearch openai --upgrade -q
-# MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 
