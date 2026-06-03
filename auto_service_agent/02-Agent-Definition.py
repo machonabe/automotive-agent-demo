@@ -31,6 +31,10 @@
 
 # COMMAND ----------
 
+dbutils.library.restartPython()
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## 1. 設定読み込み・初期化
 # MAGIC
