@@ -238,7 +238,10 @@ create_or_sync_index(CASE_INDEX_NAME, CASE_TABLE, "case_id", "text")
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 8. Online Table 作成（顧客・車両情報のリアルタイム検索用）
+# MAGIC ## 8. Online Table 作成（オプション）
+# MAGIC
+# MAGIC **注意**: エージェントは `spark.table()` で Delta を直接参照するため、Online Table はデモ動作に必須ではありません。
+# MAGIC Feature Serving エンドポイント経由の低レイテンシ参照が必要な場合のみ作成してください。
 
 # COMMAND ----------
 
@@ -250,18 +253,23 @@ def create_online_table(table_name, pk_columns):
         return
     except Exception:
         pass
-    print(f"'{online_name}' を作成中...")
-    w.online_tables.create(
-        table=OnlineTable(
-            name=online_name,
-            spec=OnlineTableSpec(
-                source_table_full_name=table_name,
-                primary_key_columns=pk_columns,
-                run_triggered=OnlineTableSpecTriggeredSchedulingPolicy()
+    print(f"'{online_name}' を作成中（バックグラウンドで継続されます）...")
+    try:
+        w.online_tables.create(
+            table=OnlineTable(
+                name=online_name,
+                spec=OnlineTableSpec(
+                    source_table_full_name=table_name,
+                    primary_key_columns=pk_columns,
+                    run_triggered=OnlineTableSpecTriggeredSchedulingPolicy()
+                )
             )
         )
-    )
-    print(f"✅ '{online_name}' 作成完了")
+        print(f"✅ '{online_name}' 作成完了")
+    except TimeoutError:
+        print(f"⏳ '{online_name}' はバックグラウンドで作成中です（デモ動作には影響しません）")
+    except Exception as e:
+        print(f"⚠️  '{online_name}' 作成スキップ: {e}")
 
 create_online_table(CUSTOMER_TABLE, ["customer_id"])
 create_online_table(VEHICLE_TABLE,  ["vehicle_id"])
