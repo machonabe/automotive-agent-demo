@@ -300,7 +300,7 @@ class AutoServiceAgent(mlflow.pyfunc.ChatModel):
             response = client.chat.completions.create(
                 model=LLM_MODEL, messages=conversation,
                 tools=TOOLS, tool_choice="auto",
-                temperature=0.0, max_tokens=2048
+                max_tokens=2048
             )
             message = response.choices[0].message
             if not message.tool_calls:
@@ -428,7 +428,7 @@ class AutoServiceAgent(mlflow.pyfunc.ChatModel):
             conv.append({{"role":m.role,"content":m.content}} if hasattr(m,"role") else m)
         message = None
         for _ in range(5):
-            resp = client.chat.completions.create(model=LLM_MODEL, messages=conv, tools=TOOLS, tool_choice="auto", temperature=0.0, max_tokens=2048)
+            resp = client.chat.completions.create(model=LLM_MODEL, messages=conv, tools=TOOLS, tool_choice="auto", max_tokens=2048)
             message = resp.choices[0].message
             if not message.tool_calls: break
             conv.append(message)

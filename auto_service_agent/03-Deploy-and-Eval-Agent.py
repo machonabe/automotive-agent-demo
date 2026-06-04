@@ -182,7 +182,7 @@ customer_tier_compliance = make_genai_metric(
         )
     ],
     model=f"endpoints:/{LLM_MODEL}",
-    parameters={"temperature": 0.0},
+    parameters={},
     greater_is_better=True,
     max_workers=4
 )
@@ -216,7 +216,7 @@ safety_urgency_detection = make_genai_metric(
         )
     ],
     model=f"endpoints:/{LLM_MODEL}",
-    parameters={"temperature": 0.0},
+    parameters={},
     greater_is_better=True,
     max_workers=4
 )
