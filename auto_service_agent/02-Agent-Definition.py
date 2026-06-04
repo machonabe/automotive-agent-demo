@@ -297,12 +297,11 @@ class AutoServiceAgent(mlflow.pyfunc.ChatModel):
 
         message = None
         for _ in range(5):  # 最大5回のツール呼び出し
-            with mlflow.trace(name="llm_call", span_type="llm"):
-                response = client.chat.completions.create(
-                    model=LLM_MODEL, messages=conversation,
-                    tools=TOOLS, tool_choice="auto",
-                    temperature=0.0, max_tokens=2048
-                )
+            response = client.chat.completions.create(
+                model=LLM_MODEL, messages=conversation,
+                tools=TOOLS, tool_choice="auto",
+                temperature=0.0, max_tokens=2048
+            )
             message = response.choices[0].message
             if not message.tool_calls:
                 break
@@ -310,9 +309,7 @@ class AutoServiceAgent(mlflow.pyfunc.ChatModel):
             for tc in message.tool_calls:
                 func_name = tc.function.name
                 func_args = json.loads(tc.function.arguments)
-                with mlflow.trace(name=f"tool_{func_name}", span_type="tool") as span:
-                    span.set_attribute("function_name", func_name)
-                    result = TOOL_FUNCTIONS[func_name](**func_args) if func_name in TOOL_FUNCTIONS else {"error": f"未定義: {func_name}"}
+                result = TOOL_FUNCTIONS[func_name](**func_args) if func_name in TOOL_FUNCTIONS else {"error": f"未定義: {func_name}"}
                 conversation.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(result, ensure_ascii=False, default=str)})
 
         final = message.content if message and message.content else "申し訳ありません。回答を生成できませんでした。"
@@ -437,7 +434,7 @@ class AutoServiceAgent(mlflow.pyfunc.ChatModel):
             conv.append(message)
             for tc in message.tool_calls:
                 fn, fa = tc.function.name, json.loads(tc.function.arguments)
-                result = TOOL_FUNCTIONS[fn](**fa) if fn in TOOL_FUNCTIONS else {{"error":f"未定義: {{fn}}"}}
+                result = TOOL_FUNCTIONS.get(fn, lambda **_: {{"error":f"未定義: {{fn}}"}})(**fa)
                 conv.append({{"role":"tool","tool_call_id":tc.id,"content":json.dumps(result,ensure_ascii=False,default=str)}})
         final = message.content if message and message.content else "申し訳ありません。"
         return ChatCompletionResponse(choices=[ChatChoice(index=0, message=ChatMessage(role="assistant",content=final))])
