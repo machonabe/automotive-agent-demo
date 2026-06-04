@@ -48,7 +48,7 @@ import time
 
 import mlflow
 from databricks.sdk import WorkspaceClient
-from databricks.sdk.service.catalog import OnlineTableSpec, OnlineTableSpecTriggeredSchedulingPolicy
+from databricks.sdk.service.catalog import OnlineTable, OnlineTableSpec, OnlineTableSpecTriggeredSchedulingPolicy
 from databricks.sdk.service.vectorsearch import (
     EndpointType,
     VectorIndexType,
@@ -252,11 +252,13 @@ def create_online_table(table_name, pk_columns):
         pass
     print(f"'{online_name}' を作成中...")
     w.online_tables.create(
-        name=online_name,
-        spec=OnlineTableSpec(
-            source_table_full_name=table_name,
-            primary_key_columns=pk_columns,
-            run_triggered=OnlineTableSpecTriggeredSchedulingPolicy()
+        table=OnlineTable(
+            name=online_name,
+            spec=OnlineTableSpec(
+                source_table_full_name=table_name,
+                primary_key_columns=pk_columns,
+                run_triggered=OnlineTableSpecTriggeredSchedulingPolicy()
+            )
         )
     )
     print(f"✅ '{online_name}' 作成完了")
