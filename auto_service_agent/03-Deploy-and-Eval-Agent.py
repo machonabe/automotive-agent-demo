@@ -65,13 +65,17 @@ context = dbutils.notebook.entry_point.getDbutils().notebook().getContext()
 notebook_dir = os.path.dirname(context.notebookPath().get())
 agent_file_path = f"/Workspace{notebook_dir}/agent.py"
 
+# log_model のバリデーション時に認証情報が必要なため、環境変数を事前に設定
+os.environ["DATABRICKS_HOST"]  = f"https://{DATABRICKS_HOST}"
+os.environ["DATABRICKS_TOKEN"] = DATABRICKS_TOKEN
+
 input_example = {
     "messages": [{"role": "user", "content": "顧客ID C001です。私の車のオイル交換について教えてください。"}]
 }
 
 with mlflow.start_run(run_name="auto_service_agent_v1") as run:
     logged_model = mlflow.pyfunc.log_model(
-        artifact_path="agent",
+        name="agent",
         python_model=agent_file_path,
         pip_requirements=["mlflow", "databricks-sdk", "databricks-vectorsearch", "openai"],
         input_example=input_example,
